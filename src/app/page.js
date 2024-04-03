@@ -2,12 +2,9 @@ import Navigation from "./components/Navigation";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="fixed left-0 top-0 h-full z-50">
-        <Navigation />
-      </div>
-      <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
-        Home
+    <main className="flex min-h-screen">
+      <Navigation activePage="/" />
+      <div className="flex flex-col flex-1 m-8 justify-center gap-y-5">
       </div>
     </main>
   );

@@ -2,22 +2,29 @@ import Navigation from ".././components/Navigation";
 
 export default function FlashCards() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="fixed left-0 top-0 h-full z-50">
-        <Navigation />
+    <main className="flex min-h-screen">
+      <Navigation activePage="/flash-cards" />
+      <div className="flex flex-col flex-1 m-8 justify-center gap-y-5">
+        <div>
+          <div className="text-xl text-gray-500 font-bold">Topic Name</div>
+          <div className="text-sm text-gray-500">Subject (0000)</div>
+        </div>
+        <div className="w-full bg-gray-200 rounded-md p-12">
+          <div className="text-gray-600 underline">View Solution</div>{" "}
+          {/*eye icon*/}
+        </div>
+        <div className="flex w-full justify-between">
+          <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+            I can do this question. {/*tick icon*/}
+          </button>
+          <button className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+            My answer is incorrect. {/*x icon*/}
+          </button>
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
+            Skip {/*arrow right icon*/}
+          </button>
+        </div>
       </div>
-      <div className="flex space-x-4">
-        <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-          Red Button
-        </button>
-        <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
-          Green Button
-        </button>
-        <button className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
-          Grey Button
-        </button>
-      </div>
-      <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex"></div>
     </main>
   );
 }
