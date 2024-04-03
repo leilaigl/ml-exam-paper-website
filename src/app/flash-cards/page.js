@@ -2,29 +2,28 @@ import Navigation from ".././components/Navigation";
 
 export default function FlashCards() {
   return (
-    <main className="flex flex-col min-h-screen items-center justify-between p-24">
-      <div className="flex-grow flex flex-col justify-end">
-        <div className="flex-1 max-w-5xl w-full items-center justify-between text-sm lg:flex"></div>
-        <div className="flex justify-center bg-gray-200 py-6 px-8 rounded-lg">
-          {/* Rectangular div above the buttons */}
-          <p>rectangular div</p>
+    <main className="flex min-h-screen">
+      <Navigation activePage="/flash-cards" />
+      <div className="flex flex-col flex-1 m-8 justify-center gap-y-5">
+        <div>
+          <div className="text-xl text-gray-500 font-bold">Topic Name</div>
+          <div className="text-sm text-gray-500">Subject (0000)</div>
         </div>
-        <div className="flex justify-center space-x-4 mt-8">
-          {/* Buttons moved to the bottom of the page */}
-          <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-            My answer is incorrect
+        <div className="w-full bg-gray-200 rounded-md p-12">
+          <div className="text-gray-600 underline">View Solution</div>{" "}
+          {/*eye icon*/}
+        </div>
+        <div className="flex w-full justify-between">
+          <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+            I can do this question. {/*tick icon*/}
           </button>
-          <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
-            I can do this question
+          <button className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+            My answer is incorrect. {/*x icon*/}
           </button>
-          <button className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
-            Skip
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
+            Skip {/*arrow right icon*/}
           </button>
         </div>
-      </div>
-      <div className="fixed left-0 top-0 h-full z-50">
-        {/* Assuming Navigation is positioned absolutely */}
-        <Navigation />
       </div>
     </main>
   );
