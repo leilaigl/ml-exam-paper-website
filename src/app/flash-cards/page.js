@@ -1,5 +1,5 @@
 import Navigation from ".././components/Navigation";
-
+import { Eye } from ".././components/Icons"; 
 export default function FlashCards() {
   return (
     <main className="flex min-h-screen">
@@ -11,7 +11,7 @@ export default function FlashCards() {
         </div>
         <div className="w-full bg-gray-200 rounded-md p-12">
           <div className="text-gray-600 underline">View Solution</div>{" "}
-          {/*eye icon*/}
+          <Eye />
         </div>
         <div className="flex w-full justify-between">
           <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
