@@ -1,28 +1,79 @@
 import Navigation from ".././components/Navigation";
+import Link from "next/link";
 
 export default function FlashCards() {
+  const papers = [
+    {
+      id: 411021121,
+      topics: "Geography Paper 2",
+      paperId: "0460",
+      preview: "Lorem ipsum dolor sit amet...",
+      status: "View",
+    },
+    {
+      id: 411021122,
+      topics: "Geography Paper 2",
+      paperId: "0460",
+      preview: "Lorem ipsum dolor sit amet...",
+      status: "View",
+    },
+    {
+      id: 411021123,
+      topics: "Geography Paper 2",
+      paperId: "0460",
+      preview: "Lorem ipsum dolor sit amet...",
+      status: "Viewed",
+    },
+  ];
+
   return (
     <main className="flex min-h-screen">
       <Navigation activePage="/flash-cards" />
       <div className="flex flex-col flex-1 m-8 justify-center gap-y-5">
-        <div>
-          <div className="text-xl text-gray-500 font-bold">Topic Name</div>
-          <div className="text-sm text-gray-500">Subject (0000)</div>
-        </div>
-        <div className="w-full bg-gray-200 rounded-md p-12">
-          <div className="text-gray-600 underline">View Solution</div>
-          {/*eye icon*/}
-        </div>
-        <div className="flex w-full justify-between">
-          <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-            I can do this question. {/*tick icon*/}
-          </button>
-          <button className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
-            My answer is incorrect. {/*x icon*/}
-          </button>
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
-            Skip {/*arrow right icon*/}
-          </button>
+        <div className="rounded-lg overflow-hidden border border-gray-300">
+          <table className="w-full">
+            <thead className="bg-blue-500 text-white">
+              <tr>
+                <th className="py-2 px-4 font-light"># </th>
+                <th className="py-2 px-4">Topic </th>
+                <th className="py-2 px-4">Code </th>
+                <th className="py-2 px-4">Preview </th>
+                <th className="py-2 px-4">Status </th>
+              </tr>
+            </thead>
+            <tbody>
+              {papers.map((paper, index) => (
+                <tr
+                  className="border-t border-gray-300 text-gray-600"
+                  key={index}
+                >
+                  <td className="py-2 px-4 text-center">{index + 1}</td>
+                  <td className="py-2 px-4">
+                    <Link href={`/flash-cards/${paper.id}.png`}>
+                      {paper.topics}
+                    </Link>
+                  </td>
+                  <td className="py-2 px-4 text-center">{paper.paperId}</td>
+                  <td className="py-2 px-4">{paper.preview}</td>
+                  <td className="py-2 px-4">
+                    <span
+                      className={`inline-flex items-center px-3 py-1 rounded-full text-white font-medium ${
+                        paper.status === "Viewed"
+                          ? "bg-gray-500"
+                          : paper.status === "View"
+                          ? "bg-green-600"
+                          : "bg-red-500"
+                      }`}
+                    >
+                      <Link href={`/flash-cards/${paper.id}`}>
+                        {paper.status}
+                      </Link>
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </main>
