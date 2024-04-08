@@ -10,7 +10,7 @@ export default function FlashCards() {
           <div className="text-sm text-gray-500">Subject (0000)</div>
         </div>
         <div className="w-full bg-gray-200 rounded-md p-12">
-          <div className="text-gray-600 underline">View Solution</div>{" "}
+          <div className="text-gray-600 underline">View Solution</div>
           <Eye />
         </div>
         <div className="flex w-full justify-between">
