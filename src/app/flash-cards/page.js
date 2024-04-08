@@ -1,5 +1,6 @@
 import Navigation from ".././components/Navigation";
-import { Eye } from ".././components/Icons"; 
+import { Eye } from "../components/Icons";
+
 export default function FlashCards() {
   return (
     <main className="flex min-h-screen">
@@ -10,17 +11,19 @@ export default function FlashCards() {
           <div className="text-sm text-gray-500">Subject (0000)</div>
         </div>
         <div className="w-full bg-gray-200 rounded-md p-12">
-          <div className="text-gray-600 underline">View Solution</div>
-          <Eye />
+          <div className="text-gray-600 underline inline-flex items-center gap-2">
+            View Solution
+            <Eye />
+          </div>
         </div>
         <div className="flex w-full justify-between">
-          <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+          <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 inline-flex items-center gap-2">
             I can do this question. {/*tick icon*/}
           </button>
-          <button className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+          <button className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 inline-flex items-center gap-2">
             My answer is incorrect. {/*x icon*/}
           </button>
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50">
+          <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 inline-flex items-center gap-2">
             Skip {/*arrow right icon*/}
           </button>
         </div>
