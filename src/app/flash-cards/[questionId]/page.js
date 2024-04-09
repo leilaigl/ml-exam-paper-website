@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Navigation from "../../components/Navigation";
 import Image from "next/image";
@@ -7,38 +7,54 @@ import Image from "next/image";
 export default function QuestionId() {
   const params = useParams();
   const router = useRouter();
-  const questionId = params.questionId;
-  const [currentQuestionId, setCurrentQuestionId] = useState(null);
+  const [questionCounter, setQuestionCounter] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [listName, setListName] = useState("");
+  const [questionList, setQuestionList] = useState([]);
 
   useEffect(() => {
-    const questionIdWithoutExtension = questionId.split('png')[0];
-    const questionIdAsInteger = parseInt(questionIdWithoutExtension);
-    setCurrentQuestionId(questionIdAsInteger);
-  }, [questionId]);
+    setListName(sessionStorage.getItem("listName"));
+    setQuestionList(JSON.parse(sessionStorage.getItem("questionList")));
+    setQuestionCounter(sessionStorage.getItem("questionCounter"));
+    setTotalQuestions(questionList.length);
+    console.log(listName, questionList);
+  }, []);
 
-  const goToNextQuestion = () => {
-    const nextQuestionId = getNextQuestionId(currentQuestionId);
-    console.log('reach2');
-    router.push(`/flash-cards/${nextQuestionId}` + ".png", 'push');
-  };
-
-  const removeQuestion = () => {
-    goToNextQuestion();
-  };
 
   const goToPreviousQuestion = () => {
-    const previousQuestionId = getPreviousQuestionId(currentQuestionId);
-    console.log('reach3');
-    router.push(`/flash-cards/${previousQuestionId}` + ".png", 'push');
+    if (questionCounter === -1) {
+      setQuestionCounter(questionList.length - 1);
+    } else {
+      setQuestionCounter(parseInt(questionCounter) - 1);
+      sessionStorage.setItem("questionCounter", questionCounter);
+      const previousQuestionId = questionList[questionCounter];
+      router.push(`/flash-cards/${previousQuestionId}` + ".png", "push");
+    }
   };
-
-  const getNextQuestionId = (currentId) => {
-    console.log(currentId + 1);
-    return currentId + 1;
+  
+  const removeQuestion = () => {
+    if (questionList.length === 0) {
+      return;
+    }
+    setQuestionList(questionList.splice(questionCounter, 1));
+    sessionStorage.setItem("questionList", JSON.stringify(questionList));
+    const nextQuestionId = questionList[questionCounter];
+    console.log(nextQuestionId);
+    console.log(questionList);
+    console.log(sessionStorage.getItem("questionList"));
+    router.push(`/flash-cards/${nextQuestionId}` + ".png", "push");
+    // };
   };
-
-  const getPreviousQuestionId = (currentId) => {
-    return currentId - 1;
+  
+  const goToNextQuestion = () => {
+    if (questionCounter === questionList.length) {
+      setQuestionCounter(0);
+    } else {
+      setQuestionCounter(parseInt(questionCounter) + 1);
+      sessionStorage.setItem("questionCounter", questionCounter);
+      const nextQuestionId = questionList[questionCounter];
+      router.push(`/flash-cards/${nextQuestionId}` + ".png", "push");
+    }
   };
 
   return (
@@ -62,13 +78,22 @@ export default function QuestionId() {
           {/*eye icon*/}
         </div>
         <div className="flex w-full justify-between">
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50" onClick={goToPreviousQuestion}>
+          <button
+            className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+            onClick={goToPreviousQuestion}
+          >
             Back {/*arrow right icon*/}
           </button>
-          <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50" onClick={removeQuestion}>
+          <button
+            className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+            onClick={removeQuestion}
+          >
             I can do this question. {/*tick icon*/}
           </button>
-          <button className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50" onClick={goToNextQuestion}>
+          <button
+            className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+            onClick={goToNextQuestion}
+          >
             My answer is incorrect. {/*x icon*/}
           </button>
         </div>

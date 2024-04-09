@@ -1,30 +1,28 @@
+"use client";
 import Navigation from ".././components/Navigation";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function FlashCards() {
+  const router = useRouter();
+
   const papers = [
     {
-      id: 411021121,
-      topics: "Geography Paper 2",
+      id: 46021,
+      topics: "Geography Paper 2 - Rivers",
+      questionList: [460211, 460212, 460213],
       paperId: "0460",
       preview: "Lorem ipsum dolor sit amet...",
       status: "View",
-    },
-    {
-      id: 411021122,
-      topics: "Geography Paper 2",
-      paperId: "0460",
-      preview: "Lorem ipsum dolor sit amet...",
-      status: "View",
-    },
-    {
-      id: 411021123,
-      topics: "Geography Paper 2",
-      paperId: "0460",
-      preview: "Lorem ipsum dolor sit amet...",
-      status: "Viewed",
-    },
+    }
   ];
+
+  function handleRowClick(listName, list) {
+    sessionStorage.setItem('listName', listName);
+    sessionStorage.setItem('questionList', JSON.stringify(list));
+    sessionStorage.setItem('questionCounter', 0);
+    console.log(papers[0].questionList[0]);
+    router.push(`/flash-cards/${papers[0].questionList[0]}` + ".png", 'push');
+  };
 
   return (
     <main className="flex min-h-screen">
@@ -49,14 +47,14 @@ export default function FlashCards() {
                 >
                   <td className="py-2 px-4 text-center">{index + 1}</td>
                   <td className="py-2 px-4">
-                    <Link href={`/flash-cards/${paper.id}.png`}>
+                    <button onClick={() => handleRowClick(paper.topics, paper.questionList)}>
                       {paper.topics}
-                    </Link>
+                    </button>
                   </td>
                   <td className="py-2 px-4 text-center">{paper.paperId}</td>
                   <td className="py-2 px-4">{paper.preview}</td>
                   <td className="py-2 px-4">
-                    <span
+                    <button
                       className={`inline-flex items-center px-3 py-1 rounded-full text-white font-medium ${
                         paper.status === "Viewed"
                           ? "bg-gray-500"
@@ -64,11 +62,10 @@ export default function FlashCards() {
                           ? "bg-green-600"
                           : "bg-red-500"
                       }`}
+                      onClick={() => handleRowClick(paper.topics, paper.questionList)}
                     >
-                      <Link href={`/flash-cards/${paper.id}`}>
                         {paper.status}
-                      </Link>
-                    </span>
+                    </button>
                   </td>
                 </tr>
               ))}

@@ -3,7 +3,7 @@ import React from "react";
 
 const Navigation = ({ activePage }) => {
   return (
-    <div className="flex flex-col h-screen border-r-2 border-[#9ba5b7]">
+    <div className="flex flex-col h-screen w-52 border-r-2 border-[#9ba5b7]">
       <nav className="flex-1 overflow-y-auto">
         <ul>
           <li
