@@ -1,7 +1,9 @@
+"use client";
 import Navigation from ".././components/Navigation";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function PredictedPapers() {
+  const router = useRouter();
   const papers = [
     {
       id: "0410_w21_qp_12.pdf",
@@ -26,6 +28,22 @@ export default function PredictedPapers() {
     },
   ];
 
+  const updateRecentlyViewed = (itemId, itemLink, itemPaperId) => {
+    let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+    const now = new Date();
+    recentlyViewed.unshift({ id: itemId, link: itemLink, itemPaperId, timestamp: now });
+    localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+  };
+
+  function handleRowClick(listName, list, paperId) {
+    sessionStorage.setItem('listName', listName);
+    sessionStorage.setItem('questionList', JSON.stringify(list));
+    sessionStorage.setItem('questionCounter', 0);
+    const chapterLink = `/predicted-papers/${paperId}`;
+    updateRecentlyViewed(listName, chapterLink, paperId);
+    router.push(chapterLink, 'push');
+  };
+
   return (
     <main className="flex min-h-screen">
       <Navigation activePage="/predicted-papers" />
@@ -49,14 +67,14 @@ export default function PredictedPapers() {
                 >
                   <td className="py-2 px-4 text-center">{index + 1}</td>
                   <td className="py-2 px-4">
-                    <Link href={`/predicted-papers/${paper.id}`}>
+                    <button onClick={() => handleRowClick(paper.topics, paper.questionList, paper.id)}>
                       {paper.topics}
-                    </Link>
+                    </button>
                   </td>
                   <td className="py-2 px-4 text-center">{paper.paperId}</td>
                   <td className="py-2 px-4">{paper.preview}</td>
                   <td className="py-2 px-4">
-                    <span
+                    <button
                       className={`inline-flex items-center px-3 py-1 rounded-full text-white font-medium ${
                         paper.status === "Viewed"
                           ? "bg-gray-500"
@@ -64,11 +82,10 @@ export default function PredictedPapers() {
                           ? "bg-green-600"
                           : "bg-red-500"
                       }`}
+                      onClick={() => handleRowClick(paper.topics, paper.questionList, paper.id)}
                     >
-                      <Link href={`/predicted-papers/${paper.id}`}>
                         {paper.status}
-                      </Link>
-                    </span>
+                    </button>
                   </td>
                 </tr>
               ))}

@@ -5,6 +5,13 @@ import { useRouter } from "next/navigation";
 export default function FlashCards() {
   const router = useRouter();
 
+  const updateRecentlyViewed = (itemId, itemLink, itemPaperId) => {
+    let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+    const now = new Date();
+    recentlyViewed.unshift({ id: itemId, link: itemLink, itemPaperId, timestamp: now });
+    localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+  };
+
   const papers = [
     {
       id: 46021,
@@ -16,12 +23,13 @@ export default function FlashCards() {
     }
   ];
 
-  function handleRowClick(listName, list) {
+  function handleRowClick(listName, list, paperId) {
     sessionStorage.setItem('listName', listName);
     sessionStorage.setItem('questionList', JSON.stringify(list));
     sessionStorage.setItem('questionCounter', 0);
-    console.log(papers[0].questionList[0]);
-    router.push(`/flash-cards/${papers[0].questionList[0]}` + ".png", 'push');
+    const chapterLink = `/flash-cards/${papers[0].questionList[0]}` + ".png";
+    updateRecentlyViewed(listName, chapterLink, paperId);
+    router.push(chapterLink, 'push');
   };
 
   return (
@@ -47,7 +55,7 @@ export default function FlashCards() {
                 >
                   <td className="py-2 px-4 text-center">{index + 1}</td>
                   <td className="py-2 px-4">
-                    <button onClick={() => handleRowClick(paper.topics, paper.questionList)}>
+                    <button onClick={() => handleRowClick(paper.topics, paper.questionList, paper.paperId)}>
                       {paper.topics}
                     </button>
                   </td>
@@ -62,7 +70,7 @@ export default function FlashCards() {
                           ? "bg-green-600"
                           : "bg-red-500"
                       }`}
-                      onClick={() => handleRowClick(paper.topics, paper.questionList)}
+                      onClick={() => handleRowClick(paper.topics, paper.questionList, paper.paperId)}
                     >
                         {paper.status}
                     </button>
