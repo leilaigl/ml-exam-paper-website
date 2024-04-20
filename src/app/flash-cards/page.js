@@ -1,15 +1,32 @@
 "use client";
 import Navigation from ".././components/Navigation";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function FlashCards() {
   const router = useRouter();
+  const [recentlyViewedData, setRecentlyViewedData] = useState(null);
+
+  useEffect(() => {
+    if (typeof Storage !== "undefined") {
+      let storedViewedData = localStorage.getItem("recentlyViewed");
+      setRecentlyViewedData(storedViewedData);
+    } else {
+      console.log("Local storage is not available.");
+    }
+  }, []);
 
   const updateRecentlyViewed = (itemId, itemLink, itemPaperId) => {
-    let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed')) || [];
+    let recentlyViewed =
+      JSON.parse(localStorage.getItem("recentlyViewed")) || [];
     const now = new Date();
-    recentlyViewed.unshift({ id: itemId, link: itemLink, itemPaperId, timestamp: now });
-    localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+    recentlyViewed.unshift({
+      id: itemId,
+      link: itemLink,
+      itemPaperId,
+      timestamp: now,
+    });
+    localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
   };
 
   const papers = [
@@ -20,17 +37,17 @@ export default function FlashCards() {
       paperId: "0460",
       preview: "Lorem ipsum dolor sit amet...",
       status: "View",
-    }
+    },
   ];
 
   function handleRowClick(listName, list, paperId) {
-    sessionStorage.setItem('listName', listName);
-    sessionStorage.setItem('questionList', JSON.stringify(list));
-    sessionStorage.setItem('questionCounter', 0);
+    sessionStorage.setItem("listName", listName);
+    sessionStorage.setItem("questionList", JSON.stringify(list));
+    sessionStorage.setItem("questionCounter", 0);
     const chapterLink = `/flash-cards/${papers[0].questionList[0]}` + ".png";
     updateRecentlyViewed(listName, chapterLink, paperId);
-    router.push(chapterLink, 'push');
-  };
+    router.push(chapterLink, "push");
+  }
 
   return (
     <main className="flex min-h-screen">
@@ -55,25 +72,37 @@ export default function FlashCards() {
                 >
                   <td className="py-2 px-4 text-center">{index + 1}</td>
                   <td className="py-2 px-4">
-                    <button onClick={() => handleRowClick(paper.topics, paper.questionList, paper.paperId)}>
+                    <button
+                      onClick={() =>
+                        handleRowClick(
+                          paper.topics,
+                          paper.questionList,
+                          paper.paperId
+                        )
+                      }
+                    >
                       {paper.topics}
                     </button>
                   </td>
                   <td className="py-2 px-4 text-center">{paper.paperId}</td>
                   <td className="py-2 px-4">{paper.preview}</td>
                   <td className="py-2 px-4">
-                    <button
+                    {recentlyViewedData && <button
                       className={`inline-flex items-center px-3 py-1 rounded-full text-white font-medium ${
-                        paper.status === "Viewed"
+                        recentlyViewedData.includes(paper.paperId)
                           ? "bg-gray-500"
-                          : paper.status === "View"
-                          ? "bg-green-600"
-                          : "bg-red-500"
+                          : "bg-green-600"
                       }`}
-                      onClick={() => handleRowClick(paper.topics, paper.questionList, paper.paperId)}
+                      onClick={() =>
+                        handleRowClick(
+                          paper.topics,
+                          paper.questionList,
+                          paper.paperId
+                        )
+                      }
                     >
-                        {paper.status}
-                    </button>
+                      {recentlyViewedData.includes(paper.paperId) ? "Viewed" : "View"}
+                    </button>}
                   </td>
                 </tr>
               ))}

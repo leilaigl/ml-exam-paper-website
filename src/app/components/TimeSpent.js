@@ -54,7 +54,11 @@ const TimeSpent = ({ timeData }) => {
   }, [timeData]);
 
   return (
-    <canvas ref={chartRef} className='p-4 rounded-md border-[#545F71] border-2'></canvas>
+    <canvas
+      ref={chartRef}
+      className='p-4 rounded-md border-[#545F71] border-2'
+      style={{ height: '100px', width: '100%' }}
+    ></canvas>
   );
 };
 

@@ -17,7 +17,7 @@ const Countdown = ({ events }) => {
 
 
   return (
-      <div className="overflow-hidden rounded-lg mb-4 bg-blue-500 text-white p-4">
+      <div className="rounded-lg mb-4 bg-blue-500 text-white p-4">
       <p className="text-lg font-bold">{daysRemaining} days {hoursRemaining} hours</p>
       <p className="text-sm font-light">to {labelText}</p>
       </div>

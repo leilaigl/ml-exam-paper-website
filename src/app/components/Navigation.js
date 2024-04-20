@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
+import { Right, Cards, Menu, Home } from "./Icons";
 
 const Navigation = ({ activePage }) => {
   return (
-    <div className="flex flex-col h-screen w-52 border-r-2 border-[#9ba5b7]">
+    <div className="flex flex-col w-64 border-r-2 border-[#9ba5b7]">
       <nav className="flex-1 overflow-y-auto">
         <ul>
           <li
@@ -13,7 +14,18 @@ const Navigation = ({ activePage }) => {
                 : "text-[#9ba5b7] hover:text-black"
             }`}
           >
-            <a href="/">{/*home icon*/} Home {/*right icon*/}</a>
+            <a href="/">
+              <div className="flex flex-row justify-between items-end">
+                <div className="flex gap-x-2">
+                  <Home color={`${
+              activePage === "/"
+                ? "#FFFFFF"
+                : "#545F71"
+            }`}/> Home
+                </div>
+                <div><Right /></div>
+              </div>
+            </a>
           </li>
           <li
             className={`py-3 px-6 mx-2 my-6 ${
@@ -23,7 +35,16 @@ const Navigation = ({ activePage }) => {
             }`}
           >
             <a href="/flash-cards">
-              {/*cards icon*/} Flash Cards {/*right icon*/}
+              <div className="flex flex-row justify-between items-end">
+                <div className="flex gap-x-2">
+                  <Cards color={`${
+              activePage === "/flash-cards"
+                ? "#FFFFFF"
+                : "#545F71"
+            }`}/> Flash Cards
+                </div>
+                <div><Right /></div>
+              </div>
             </a>
           </li>
           <li
@@ -33,10 +54,17 @@ const Navigation = ({ activePage }) => {
                 : "text-[#9ba5b7] hover:text-black"
             }`}
           >
-            <a
-              href="/predicted-papers"
-            >
-              {/*menu icon*/} Predicted Papers {/*right icon*/}
+            <a href="/predicted-papers">
+              <div className="flex flex-row justify-between items-end">
+                <div className="flex gap-x-2">
+                  <Menu color={`${
+              activePage === "/predicted-papers"
+                ? "#FFFFFF"
+                : "#545F71"
+            }`}/> Predicted Papers
+                </div>
+                <div><Right /></div>
+              </div>
             </a>
           </li>
         </ul>

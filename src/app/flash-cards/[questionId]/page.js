@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Navigation from "../../components/Navigation";
 import Image from "next/image";
+import { ArrowRight, Eye, Tick, X } from "@/app/components/Icons";
 
 export default function QuestionId() {
   const params = useParams();
@@ -75,31 +76,30 @@ export default function QuestionId() {
           </div>
           {button1 ? 
             <div className="text-gray-600 text-center font-semibold">Chapter complete! Return to homepage.</div> : 
-            <div className="text-gray-600 underline">View Solution</div>}
-          {/*eye icon*/}
+            <span className="flex flex-row gap-x-4 items-center"><div className="text-gray-600 underline">View Solution</div><Eye /></span>}
         </div>
         <div className="flex w-full justify-between">
           <button
-            className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md"
+            className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md flex flex-row gap-x-4 items-center"
             onClick={goToPreviousQuestion}
           >
-            Back {/*arrow right icon*/}
+            Back <ArrowRight />
           </button>
           <button
-            className={`bg-green-500 text-white py-2 px-4 rounded-md ${
+            className={`bg-green-500 text-white py-2 px-4 rounded-md flex flex-row gap-x-4 items-center ${
               button1 ? "opacity-50 cursor-not-allowed" : "hover:bg-green-600"
             }`}
             onClick={removeQuestion}
             disabled={button1}
           >
-            I can do this question. {/*tick icon*/}
+            I can do this question. <Tick />
           </button>
 
           <button
-            className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md"
+            className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md flex flex-row gap-x-4 items-center"
             onClick={goToNextQuestion}
           >
-            My answer is incorrect. {/*x icon*/}
+            My answer is incorrect. <X />
           </button>
         </div>
       </div>

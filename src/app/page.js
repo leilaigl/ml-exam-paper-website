@@ -58,7 +58,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen">
       <Navigation activePage="/" />
-      <div className="flex flex-col flex-1 m-8 justify-center gap-y-6">
+      <div className="flex flex-col flex-1 m-8 justify-center gap-y-5">
         <div>
           <div className="text-md text-gray-500 font-bold mb-2">
             Study well!
@@ -66,10 +66,12 @@ export default function Home() {
           <Countdown events={events} />
         </div>
         <div className="mb-4">
-          <div className="text-md text-gray-500">Recently Viewed</div>
           <div>
             {recentlyViewedData && (
-              <RecentlyViewed recentlyViewed={recentlyViewedData} />
+              <>
+                <div className="text-md text-gray-500">Recently Viewed</div>
+                <RecentlyViewed recentlyViewed={recentlyViewedData} />
+              </>
             )}
           </div>
         </div>
