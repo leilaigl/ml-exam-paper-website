@@ -19,25 +19,18 @@ export default function PredictedPapers() {
 
   const papers = [
     {
-      id: "0410_w21_qp_12.pdf",
-      topics: "Music Paper 1",
-      paperId: "0410",
-      preview: "Lorem ipsum dolor sit amet...",
-      status: "View",
-    },
-    {
-      id: "0460_w21_qp_23.pdf",
-      topics: "Geography Paper 2",
+      id: "0460_w24_qp_1.pdf",
+      topics: "Geography Paper 2 Variant 1",
       paperId: "0460",
-      preview: "Lorem ipsum dolor sit amet...",
+      preview: "Study Figs 5 and 6, which give information on tropical...",
       status: "View",
     },
     {
-      id: "0478_w21_qp_22.pdf",
-      topics: "Computer Science Paper 2",
-      paperId: "0478",
-      preview: "Lorem ipsum dolor sit amet...",
-      status: "Viewed",
+      id: "0460_w24_qp_2.pdf",
+      topics: "Geography Paper 2 Variant 2",
+      paperId: "0460",
+      preview: "Study the map extract, which is for Rosenfels, Zimbabwe...",
+      status: "View",
     },
   ];
 
@@ -85,7 +78,7 @@ export default function PredictedPapers() {
                   key={index}
                 >
                   <td className="py-2 px-4 text-center">{index + 1}</td>
-                  <td className="py-2 px-4">
+                  <td className="py-2 px-4 hover:text-black">
                     <button
                       onClick={() =>
                         handleRowClick(

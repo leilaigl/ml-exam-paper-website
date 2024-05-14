@@ -33,9 +33,9 @@ export default function FlashCards() {
     {
       id: 46021,
       topics: "Geography Paper 2 - Rivers",
-      questionList: [460211, 460212, 460213],
+      questionList: [460211, 460212, 460213, 460214, 460215],
       paperId: "0460",
-      preview: "Lorem ipsum dolor sit amet...",
+      preview: "Fig. 1.3 is a cross-section through the settlement...",
       status: "View",
     },
   ];
@@ -44,6 +44,7 @@ export default function FlashCards() {
     sessionStorage.setItem("listName", listName);
     sessionStorage.setItem("questionList", JSON.stringify(list));
     sessionStorage.setItem("questionCounter", 0);
+    sessionStorage.setItem("paperId", paperId);
     const chapterLink = `/flash-cards/${papers[0].questionList[0]}` + ".png";
     updateRecentlyViewed(listName, chapterLink, paperId);
     router.push(chapterLink, "push");
@@ -71,7 +72,7 @@ export default function FlashCards() {
                   key={index}
                 >
                   <td className="py-2 px-4 text-center">{index + 1}</td>
-                  <td className="py-2 px-4">
+                  <td className="py-2 px-4 hover:text-black">
                     <button
                       onClick={() =>
                         handleRowClick(

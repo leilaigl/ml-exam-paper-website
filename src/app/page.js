@@ -8,12 +8,16 @@ import RecentlyViewed from "./components/RecentlyViewed";
 export default function Home() {
   const events = [
     {
-      date: "2024-04-20T09:00:00",
-      label: "Cambridge IGCSE Music Paper 1 (0410)",
+      date: "2024-10-16T14:30:00",
+      label: "Cambridge IGCSE Geography Paper 2 (0460)",
     },
     {
-      date: "2024-04-25T14:30:00",
-      label: "Cambridge IGCSE Geography Paper 2 (0460)",
+      date: "2024-10-23T09:00:00",
+      label: "Cambridge IGCSE Geography Paper 1 (0460)",
+    },
+    {
+      date: "2024-10-29T09:00:00",
+      label: "Cambridge IGCSE Geography Paper 4 (0460)",
     },
   ];
   const [timeData, setTimeSpentData] = useState(null);
