@@ -82,8 +82,6 @@ export default function QuestionId() {
             </div>
           ) : (
             <span className="flex flex-row gap-x-4 items-center">
-              <div className="text-gray-600 underline">View Solution</div>
-              <Eye />
             </span>
           )}
         </div>
